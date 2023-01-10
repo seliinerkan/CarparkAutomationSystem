@@ -86,6 +86,21 @@ class user_updates(Resource):
         return {"success": True,
                 "msg": "The user was successfully updated."}, 200
 
+@rest_api.route('/api/user/delete')
+class user_deletes(Resource):
+    def post(self):
+        req_data = request.get_json()
+        cardInfo = req_data.get("card_info")
+
+        userExist = Users.get_by_cardInfo(cardInfo)
+        if not userExist:
+            return {"success": False,
+                    "msg": "The card info not found."}, 400
+
+        userExist.delete()
+        return {"success": True,
+                "msg": "The user was successfully deleted."}, 200
+
 """
     Car Park Operators
 """

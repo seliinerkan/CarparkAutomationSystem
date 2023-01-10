@@ -2,8 +2,6 @@ import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 import math
 
-
-
 db = SQLAlchemy()
 
 class Users(db.Model):
@@ -15,6 +13,10 @@ class Users(db.Model):
 
     def save(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod
